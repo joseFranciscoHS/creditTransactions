@@ -15,7 +15,7 @@ class Mail(Config):
 
     def __init__(self):
         Config.__init__(self)
-        self.port = 587
+        self.port = 465
         self.smtp_server = "smtp.gmail.com"
         self.sesclient = self.get_boto_client('ses')
 
@@ -55,7 +55,7 @@ class Mail(Config):
         msg = MIMEMultipart()
         msg['Subject'] = 'This is an email with an attachment!'
         msg['From'] = self.SENDER
-        msg['To'] = self.SENDER
+        msg['To'] = receiver_email
 
         part = MIMEText(self.html(summary), "html")
         msg.attach(part)
@@ -70,9 +70,6 @@ class Mail(Config):
         msg.attach(part2)
 
         context = ssl.create_default_context()
-        with smtplib.SMTP(self.smtp_server, self.port) as server:
-            server.ehlo()
-            server.starttls(context=context)
-            server.ehlo()
+        with smtplib.SMTP_SSL(self.smtp_server, self.port, context=context) as server:
             server.login(self.SENDER, self.PASSWORD)
             server.sendmail(self.SENDER, receiver_email, msg.as_string())
