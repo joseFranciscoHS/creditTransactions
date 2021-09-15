@@ -13,6 +13,7 @@ class Config:
         'TABLE': is the dynamodb table to store the generated summaries.
         'QUEUE': is the url of the sqs used to trigger the lambda.
         'SENDER': is the email of the sender.
+        'PASSWORD': is password of the sender email.
     """
     BUCKET = os.environ['BUCKET']
     FOLDER = os.environ['FOLDER']
@@ -20,6 +21,7 @@ class Config:
     TABLE = os.environ['TABLE']
     QUEUE = os.environ['QUEUE']
     SENDER = os.environ['SENDER']
+    PASSWORD = os.environ['PASSWORD']
 
     def get_logger(self) -> logging.Logger:
         """Initiates a new logger session."""

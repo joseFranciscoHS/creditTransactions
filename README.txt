@@ -1,7 +1,7 @@
 Credit Transactions.
 
 This module is intended to create a summary containing monthly and overall information. Once the summary is created, 
-it is sent to an addressee via e-mail, and the information is stored in a DynamoDB table.
+it is sent to an addressee via e-mail with a Gmail account, and the information is stored in a DynamoDB table.
 
 Set Up.
 The following steps describe the requirements so that this module is implemented correctly.
@@ -42,7 +42,9 @@ The following steps describe the requirements so that this module is implemented
     QUEUE -> URL of the SQS which triggers the lambda.
     SENDER -> email of the sender.
     TABLE -> Name of the DynamoDB table to store the information.
-- Register the email of the SENDER into AWS SES.
+- Give permissions to the sender's gmail account.
+    allow less secure apps to use your account with the followinf link
+    https://myaccount.google.com/lesssecureapps
 - Give S3 Bucket permissions to create a SQS message.
     Go to the S3 Bucket where the transaction files are to be stored.
     Go to properties and allow Event notifications. As prefix set the FOLDER name. In Event Types select 'All object create events'. 
