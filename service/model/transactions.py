@@ -8,8 +8,8 @@ class Transaction(NewCSV):
     def __init__(self) -> None:
         NewCSV.__init__(self)
 
-    def read_transactions(self, filename: str) -> pd.DataFrame:
-        return self.read_from_s3(filename, dtype={'Id': int, 'Date': str, 'Transaction': str})
+    def read_transactions(self, key: str) -> pd.DataFrame:
+        return self.read_from_s3(key, dtype={'Id': int, 'Date': str, 'Transaction': str})
     
     @debug
     def create_summary(self, df: pd.DataFrame) -> dict:

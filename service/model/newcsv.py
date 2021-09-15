@@ -18,7 +18,7 @@ class NewCSV(Config):
         return StringIO(body)
     
     @debug
-    def read_from_s3(self, filename: str, **kwargs) -> pd.DataFrame:
-        info = self.s3client.get_object(Bucket=self.BUCKET, Key=self.FOLDER + '/' + filename)
+    def read_from_s3(self, key: str, **kwargs) -> pd.DataFrame:
+        info = self.s3client.get_object(Bucket=self.BUCKET, Key=key)
         info = self.read_object(info)
         return pd.read_csv(info, **kwargs)
