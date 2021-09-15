@@ -12,12 +12,14 @@ class Config:
         'LOGGLEVEL': is the level to be set for logging in CloudWatch.
         'TABLE': is the dynamodb table to store the generated summaries.
         'QUEUE': is the url of the sqs used to trigger the lambda.
+        'SENDER': is the email of the sender.
     """
     BUCKET = os.environ['BUCKET']
     FOLDER = os.environ['FOLDER']
     LOGLEVEL = os.environ['LOGLEVEL']
     TABLE = os.environ['TABLE']
     QUEUE = os.environ['QUEUE']
+    SENDER = os.environ['SENDER']
 
     def get_logger(self) -> logging.Logger:
         """Initiates a new logger session."""
